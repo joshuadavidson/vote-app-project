@@ -1,9 +1,6 @@
 const express = require('express');
 const compression = require('compression');
 
-//application routes
-//const test = require('./app/routes/test');
-
 //Configure application
 const app = express();
 const port = process.env.PORT || 3000;
@@ -17,7 +14,12 @@ app.use(compression());
 app.use(express.static('public'));
 
 //application routes
+app.use('/api', require('./app/routes/api.route'));
 
+//send all navigation requests back to angular
+app.get('/*', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+  });
 
 //catch 404 errors
 app.use(function(req, res, next) {
@@ -40,4 +42,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(port);
+app.listen(port, function(){
+  console.log("Server started. Listening on port: "+ port);
+});

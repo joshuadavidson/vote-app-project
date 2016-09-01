@@ -17,13 +17,11 @@ angular
 
   //delete the token from local storage to logout the user
   var logout = function() {
-    console.log("Logging out via authentication service.");
     $window.localStorage.removeItem('votingAppJWT');
   };
 
   //check if user is logged in
   var isLoggedIn = function() {
-    console.log("Checking logged in via authentication service.");
     var jwt = getToken();
     var jwtPayload;
 
@@ -45,7 +43,6 @@ angular
 
   //get the user id from the jwt
   var getUserid = function() {
-    console.log("Getting user id via authentication service.");
     //check to see if jwt exists
     if (isLoggedIn()) {
       var jwt = getToken();
@@ -61,7 +58,6 @@ angular
   };
 
   var currentUser = function() {
-    console.log("Getting current user via authentication service.");
     //lookup the user
     var id = getUserid();
 
@@ -77,7 +73,6 @@ angular
   };
 
   var register = function(credentials) {
-    console.log("Registering user via authentication service.");
     return $http.post('/api/register', credentials)
       //after successful post save the token
       .then(function(response) {
@@ -87,7 +82,6 @@ angular
   };
 
   var login = function(credentials) {
-    console.log("Logging in user via authentication service.");
     return $http.post('/api/login', credentials)
       //after successful post save the token
       .then(function(response) {

@@ -12,23 +12,40 @@ angular
 
     //create an object to hold form data
     self.credentials = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: ''
+      name: null,
+      email: null,
+      password: null
     };
 
     self.onSubmit = function() {
-      console.log("Registering User.");
-      authentication.register(self.credentials)
+      //if no password is entered
+      if(!self.credentials.password){
+        self.loginError = 'Please provide a password.';
+      }
+
+      //if email entered is invalid
+      if(!self.credentials.email){
+        self.loginError = 'Please provide a valid email.';
+      }
+
+      //if no name is entered
+      if(!self.credentials.name){
+        self.loginError = 'Please provide your name.';
+      }
+
+      if (self.credentials.name && self.credentials.email && self.credentials.password) {
+
+        authentication.register(self.credentials)
         .then(function() {
           console.log("User has been successfully registered");
           $location.path('/profile');
         })
 
         .catch(function(err) {
-          alert(err);
+          self.loginError = err.data.message;
         });
+      }
+
     };
   }]
 });

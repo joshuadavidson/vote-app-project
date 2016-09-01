@@ -11,9 +11,8 @@ router.post('', function(req, res, next) {
   var user = new User(); //create a new user mongoose object
 
   //assign properties passed from request
-  user.firstName = req.body.firstName;
-  user.lastName = req.body.lastName;
-  user.email = req.body.email.toLowerCase();
+  user.name = req.body.name;
+  user.email = req.body.email.toLowerCase(); //ensure email is in lowercase
 
   //set salt and hash using password
   user.setPassword(req.body.password);
@@ -35,7 +34,7 @@ router.post('', function(req, res, next) {
     if(err.code === 11000){ //user already exists
       res.status(409); //conflict status
       res.json({
-        "error": 'User email already exists.'
+        "message": 'User account already exists. Please Login.'
       });
     } else {
       next(err);

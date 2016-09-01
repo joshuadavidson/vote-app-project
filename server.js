@@ -1,7 +1,5 @@
 const express = require('express');
-const session = require('express-session');
 const bodyParser = require('body-parser');
-const MongoStore = require('connect-mongo')(session); //used for express-session store
 const mongoose = require('mongoose');
 const passport = require('passport');
 const appPassport = require('./config/passport'); //grab the passport function containing config
@@ -42,19 +40,8 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-//use connect-mongo MongoStore to store user sessions
-app.use(session({
-  secret: 'thebestvotingappevah',
-  saveUninitialized: true, //save sessions that are new but no modified
-  resave: false, //don't resave unmodified sessions
-  store: new MongoStore({
-      mongooseConnection: mongoose.connection
-    }) //store sessions in the database
-}));
-
 //passport middleware
 app.use(passport.initialize());
-app.use(passport.session());
 
 //Api routes
 app.use('/api', require('./api/routes/api.route'));

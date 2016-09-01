@@ -29,7 +29,7 @@ angular
 
     self.logout = function() {
       authentication.logout();
-      $location.path('/'); //return to home
+      console.log("User has been successfully logged out");
     };
   }]
 });

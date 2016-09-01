@@ -12,20 +12,41 @@ angular
 
     //create an object to hold form data
     self.credentials = {
-      email: '',
-      password: ''
+      email: null,
+      password: null
     };
 
-    self.onSubmit = function() {
-      authentication.login(self.credentials)
-      .then(function() {
-        console.log("User has been successfully logged in");
-        $location.path('/profile');
-      })
+    self.loginError = null;
 
-      .catch(function(err) {
-        console.log(err);
-      });
+    self.onSubmit = function() {
+      //if email entered is invalid
+      if(!self.credentials.email && self.credentials.password){
+        self.loginError = 'Please provide a valid email.';
+      }
+
+      //if no password is entered
+      if(!self.credentials.password && self.credentials.email){
+        self.loginError = 'Please provide a password.';
+      }
+
+      //if no email or password were passed
+      if(!self.credentials.email && !self.credentials.password){
+        self.loginError = 'Please provide a valid email and password.';
+      }
+
+      //if both email and password are provided and valid
+      if (self.credentials.email && self.credentials.password) {
+        authentication.login(self.credentials)
+        .then(function() {
+          console.log("User has been successfully logged in");
+          $location.path('/profile');
+        })
+
+        .catch(function(err) {
+          self.loginError = err.data.message;
+        });
+      }
+
     };
   }]
 });

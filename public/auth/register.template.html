@@ -6,27 +6,24 @@
     <p>
       Aready have an account? <a href="/login" class="">Login</a>
     </p>
+    
+    <p class="bg-danger" ng-show="$ctrl.loginError">
+      {{$ctrl.loginError}}
+    </p>
 
-    <form ng-submit="$ctrl.onSubmit()" class="text-left" >
-
-      <div class="form-group">
-        <label for="firstName" class="control-label">First name</label>
-
-          <input type="text" ng-model="$ctrl.credentials.firstName" class="form-control" placeholder="First Name" required />
-
-      </div>
+    <form novalidate ng-submit="$ctrl.onSubmit()" class="css-form text-left" >
 
       <div class="form-group">
-        <label for="lastName" class="control-label">Last name</label>
+        <label for="name" class="control-label">Name</label>
 
-          <input type="text" ng-model="$ctrl.credentials.lastName" class="form-control" placeholder="Last Name" required />
+          <input type="text" ng-model="$ctrl.credentials.name" class="form-control" placeholder="Last Name" required />
 
       </div>
 
       <div class="form-group">
         <label for="email" class="control-label">Email</label>
 
-          <input type="text" ng-model="$ctrl.credentials.email" class="form-control" placeholder="Email" required />
+          <input type="email" ng-model="$ctrl.credentials.email" class="form-control" placeholder="Email" required />
 
       </div>
 

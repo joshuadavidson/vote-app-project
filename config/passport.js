@@ -15,6 +15,7 @@ module.exports = function(passport) {
   //user logs in using email and password
   passport.use(new LocalStrategy({
       usernameField: 'email', //use email rather than passport default username
+      session: false //disable sessions
     },
 
     function(email, password, done) {
@@ -30,14 +31,14 @@ module.exports = function(passport) {
         //user object was not found due to incorrect email
         if (!user) {
           return done(null, false, {
-            message: 'Incorrect email.'
+            message: 'Account with this email not registered.'
           });
         }
 
         //user object was found but incorrect password
         if (!user.isValidPassword(password)) {
           return done(null, false, {
-            message: 'Incorrect password.'
+            message: 'Please check your password.'
           });
         }
 

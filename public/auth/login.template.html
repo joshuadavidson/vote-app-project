@@ -7,12 +7,16 @@
       Don't have an account? <a href="/register" class="">Register</a>
     </p>
 
-    <form ng-submit="$ctrl.onSubmit()" class="text-left">
+    <p class="bg-danger" ng-show="$ctrl.loginError">
+      {{$ctrl.loginError}}
+    </p>
+
+    <form novalidate ng-submit="$ctrl.onSubmit()" class="css-form text-left">
 
       <div class="form-group">
         <label for="email" class="control-label">Email</label>
 
-          <input type="text" ng-model="$ctrl.credentials.email" class="form-control" placeholder="Email" required />
+          <input type="email" ng-model="$ctrl.credentials.email" class="form-control" placeholder="Email" required />
 
       </div>
 

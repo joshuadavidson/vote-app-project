@@ -1,51 +1,45 @@
-//Application module
-var votingApp = angular.module('votingApp', ['ngRoute', 'ngResource']);
+angular
+.module('votingApp', [
+  'ngRoute',
+  'ngResource',
+  'authentication',
+  'home',
+  'register',
+  'login',
+  'profile'
+])
 
-//Angular routing
-votingApp.config(function($routeProvider, $locationProvider){
+.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   // use the HTML5 History API
   $locationProvider.html5Mode(true);
 
   $routeProvider.when('/', {
-    templateUrl: 'pages/home.html',
-    controller: 'homeCtrl'
+    template: '<app-home></app-home>',
   })
 
-  .when('/signup', {
-    templateUrl: 'pages/signup.html',
-    controller: 'signupCtrl'
+  .when('/register', {
+    template: '<app-register></app-register>',
   })
 
   .when('/login', {
-    templateUrl: 'pages/login.html',
-    controller: 'loginCtrl'
+    template: '<app-login></app-login>',
   })
 
   .when('/profile', {
-    templateUrl: 'pages/profile.html',
-    controller: 'profileCtrl'
+    template: '<app-profile></app-profile>',
   })
 
   .otherwise({
-    templateUrl: 'pages/404.html'
+    templateUrl: '404.html'
   });
-});
+}])
 
-//Angular services
-
-//Angular controllers
-votingApp.controller('homeCtrl', ['$scope', function($scope){
-
-}]);
-
-votingApp.controller('signupCtrl', ['$scope', function($scope){
-
-}]);
-
-votingApp.controller('loginCtrl', ['$scope', function($scope){
-
-}]);
-
-votingApp.controller('profileCtrl', ['$scope', function($scope){
-
+//work to be performed after loading all modules
+.run(['$rootScope', '$location', 'authentication', function($rootScope, $location, authentication){
+  //check every time the route changes to see if user has access to path redirect them to home otherwise
+  $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute){
+    if(nextRoute.$$route.originalPath === '/profile' && !authentication.isLoggedIn()){
+      $location.path('/');//redirect to home
+    }
+  });
 }]);

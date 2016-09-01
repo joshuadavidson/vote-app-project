@@ -1,37 +1,39 @@
+<app-header></app-header>
+
 <div class="row">
   <div class="col-sm-4 col-sm-offset-4 text-center">
-    <h1>Sign Up</h1>
+    <h1>Register</h1>
     <p>
       Aready have an account? <a href="/login" class="">Login</a>
     </p>
 
-    <form method="post" action="" class="text-left" >
+    <form ng-submit="$ctrl.onSubmit()" class="text-left" >
 
       <div class="form-group">
         <label for="firstName" class="control-label">First name</label>
 
-          <input type="text" name="firstName" id="firstName" class="form-control" value="" placeholder="First Name" required />
+          <input type="text" ng-model="$ctrl.credentials.firstName" class="form-control" placeholder="First Name" required />
 
       </div>
 
       <div class="form-group">
         <label for="lastName" class="control-label">Last name</label>
 
-          <input type="text" name="lastName" id="lastName" class="form-control" value="" placeholder="Last Name" required />
+          <input type="text" ng-model="$ctrl.credentials.lastName" class="form-control" placeholder="Last Name" required />
 
       </div>
 
       <div class="form-group">
-        <label for="email" class="control-label">Username</label>
+        <label for="email" class="control-label">Email</label>
 
-          <input type="text" name="email" id="email" class="form-control" value="" placeholder="Email" required />
+          <input type="text" ng-model="$ctrl.credentials.email" class="form-control" placeholder="Email" required />
 
       </div>
 
       <div class="form-group">
         <label for="password" class="control-label">Password</label>
 
-          <input type="password" name="password" id="password" class="form-control" value="" placeholder="Password" required />
+          <input type="password" ng-model="$ctrl.credentials.password" class="form-control" placeholder="Password" required />
 
       </div>
 
@@ -42,3 +44,5 @@
     </form>
   </div>
 </div>
+
+<app-footer></app-footer>

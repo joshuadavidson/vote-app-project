@@ -1,0 +1,28 @@
+<header>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Voting App</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" uib-collapse="$ctrl.isCollapsed">
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-hide="$ctrl.isLoggedIn"><a href="/register">Register <i class="fa fa-pencil fa-lg"></i></a></li>
+          <li ng-hide="$ctrl.isLoggedIn"><a href="/login">Login <i class="fa fa-sign-in fa-lg"></i></a></li>
+          <li ng-show="$ctrl.isLoggedIn"><a href="/profile">{{$ctrl.userData.firstName}} <i class="fa fa-user fa-lg"></i></a></li>
+          <li ng-show="$ctrl.isLoggedIn" ng-click="$ctrl.logout()"><a href="/profile">Logout <i class="fa fa-sign-out fa-lg"></i></a></li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+</header>

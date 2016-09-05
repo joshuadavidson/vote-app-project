@@ -10,6 +10,17 @@
     <p>
       Take a look at what others are voting on:
     </p>
+
+
+    <div class="panel panel-default text-center">
+
+      <ul class="list-group" ng-repeat="poll in $ctrl.polls">
+        <li class="list-group-item">
+          <h3>{{poll.title}}</h3></li>
+      </ul>
+
+    </div>
+
   </div>
 </div>
 

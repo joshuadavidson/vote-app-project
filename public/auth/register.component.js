@@ -37,7 +37,6 @@ angular
 
         authentication.register(self.credentials)
         .then(function() {
-          console.log("User has been successfully registered");
           $location.path('/profile');
         })
 

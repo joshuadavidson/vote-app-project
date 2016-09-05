@@ -17,7 +17,6 @@ mongoose.Promise = Promise; //configure mongoose to use ES6 promises
 app.set('view engine', 'ejs');
 app.set('views', './api/views');
 
-require('./test');
 //Connect to database, log db events
 mongoose.connect(process.env.DB_URI);
 mongoose.connection.on('connected', function() {

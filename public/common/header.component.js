@@ -29,7 +29,6 @@ angular
 
     self.logout = function() {
       authentication.logout();
-      console.log("User has been successfully logged out");
     };
   }]
 });

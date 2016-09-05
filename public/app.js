@@ -6,7 +6,8 @@ angular
   'home',
   'register',
   'login',
-  'profile'
+  'profile',
+  'myPolls'
 ])
 
 .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -27,6 +28,10 @@ angular
 
   .when('/profile', {
     template: '<app-profile></app-profile>',
+  })
+
+  .when('/mypolls', {
+    template: '<app-my-polls></app-my-polls>'
   })
 
   .otherwise({

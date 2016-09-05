@@ -5,18 +5,23 @@ const jwt = require('jsonwebtoken');
 var userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
-  
+
   email: {
     type: String,
     unique: true,
-    required: true
+    required: true,
+    trim: true
   },
 
   hash: String,
   salt: String
-}, {retainKeyOrder: true }); //ensure user document properties are saved in the same order that they are passed in
+}, {
+  timestamps: true, //include created and updated timestamps
+  retainKeyOrder: true //ensure user document properties are saved in the same order that they are passed in
+});
 
 //Set the salt and hash when the user sets their password
 userSchema.methods.setPassword = function(password) {

@@ -34,7 +34,7 @@ router.post('', function(req, res, next) {
     if(err.code === 11000){ //user already exists
       res.status(409); //conflict status
       res.json({
-        "message": 'User account already exists. Please Login.'
+        "message": 'User account already exists. Please login instead.'
       });
     } else {
       next(err);

@@ -38,7 +38,6 @@ angular
       if (self.credentials.email && self.credentials.password) {
         authentication.login(self.credentials)
         .then(function() {
-          console.log("User has been successfully logged in");
           $location.path('/profile');
         })
 

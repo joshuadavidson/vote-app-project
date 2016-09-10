@@ -1,9 +1,12 @@
 angular
-  .module('authentication', [])
+  .module('Authentication', [])
 
-.factory('authentication', ['$http', '$window', function($http, $window) {
+.factory('Authentication', ['$http', '$window', function($http, $window) {
+
+  var Authentication = {};
+
   //save the token to the client's local storage to persist between sessions
-  var saveToken = function(token) {
+  Authentication.saveToken = function(token) {
     //only save token if it exists
     if (token) {
       $window.localStorage.setItem('votingAppJWT', token);
@@ -11,18 +14,18 @@ angular
   };
 
   //retrieve the token from local storage
-  var getToken = function() {
+  Authentication.getToken = function() {
     return $window.localStorage.getItem('votingAppJWT');
   };
 
   //delete the token from local storage to logout the user
-  var logout = function() {
+  Authentication.logout = function() {
     $window.localStorage.removeItem('votingAppJWT');
   };
 
   //check if user is logged in
-  var isLoggedIn = function() {
-    var jwt = getToken();
+  Authentication.isLoggedIn = function() {
+    var jwt = Authentication.getToken();
     var jwtPayload;
 
     //if jwt exists check its expiry date
@@ -42,10 +45,10 @@ angular
   };
 
   //get the user id from the jwt
-  var getUserid = function() {
+  Authentication.getUserId = function() {
     //check to see if jwt exists
-    if (isLoggedIn()) {
-      var jwt = getToken();
+    if (Authentication.isLoggedIn()) {
+      var jwt = Authentication.getToken();
       var jwtPayload;
       jwtPayload = jwt.split('.')[1]; //get the payload portion of the jwt
       jwtPayload = $window.atob(jwtPayload); //decode the base64 jwt payload
@@ -57,48 +60,39 @@ angular
     }
   };
 
-  var currentUser = function() {
+  Authentication.currentUser = function() {
     //lookup the user
-    var id = getUserid();
+    var id = Authentication.getUserId();
 
     //grab the profile data
     return $http({
       method: 'GET',
       url: '/api/profile',
       headers: {
-        Authorization: 'Bearer ' + getToken()
+        Authorization: 'Bearer ' + Authentication.getToken()
       },
       data: id
     });
   };
 
-  var register = function(credentials) {
+  Authentication.register = function(credentials) {
     return $http.post('/api/register', credentials)
       //after successful post save the token
       .then(function(response) {
-        saveToken(response.data.jwt);
+        Authentication.saveToken(response.data.jwt);
       });
     //errors handled where signup function is invoked
   };
 
-  var login = function(credentials) {
+  Authentication.login = function(credentials) {
     return $http.post('/api/login', credentials)
       //after successful post save the token
       .then(function(response) {
-        saveToken(response.data.jwt);
+        Authentication.saveToken(response.data.jwt);
       });
     //errors handled where login function is invoked
   };
 
-  return {
-    saveToken: saveToken,
-    getToken: getToken,
-    logout: logout,
-    isLoggedIn: isLoggedIn,
-    getUserid: getUserid,
-    currentUser: currentUser,
-    register: register,
-    login: login
-  };
+  return Authentication;
 
 }]);

@@ -23,4 +23,9 @@ var pollSchema = new mongoose.Schema({
   retainKeyOrder: true //ensure user document properties are saved in the same order that they are passed in
 });
 
+//Set the salt and hash when the user sets their password
+pollSchema.methods.alreadyVoted = function(respondent) {
+  return this.respondents.includes(respondent);
+};
+
 module.exports = mongoose.model('Poll', pollSchema);

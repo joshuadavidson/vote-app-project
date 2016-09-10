@@ -1,20 +1,24 @@
 <app-header></app-header>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-3 text-center">
+  <div class="col-md-4 col-md-offset-4 text-center">
     <h1>My Polls</h1>
 
-    <div ng-repeat="poll in $ctrl.polls">
+    <p>
+      <a ng-href="/newpoll" class="btn btn-default">Create New Poll</a>
+    </p>
 
-      <div class="panel panel-default">
-        <div class="panel-body">
-          {{poll.title}}
-          <div class="btn-group pull-right" role="group" aria-label="...">
-            <button type="button" class="btn btn-primary">View</button>
-            <button type="button" class="btn btn-warning">Edit</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-          </div>
-        </div>
+    <div class="list-group text-left">
+
+      <div class="list-group-item clearfix text-center" ng-repeat="poll in $ctrl.polls">
+        <h3>{{poll.title}}</h3>
+        <small>Responses: {{poll.respondents.length}}<br>
+        <span>
+          <a ng-href="/poll/{{poll._id}}/view" class="btn btn-xs btn-primary">View Poll</a>
+          <a ng-href="/poll/{{poll._id}}/results" class="btn btn-xs btn-success">View Results</a>
+          <a ng-href="/newpoll/{{poll._id}}" class="btn btn-xs btn-warning">New Poll Based on This One</a>
+          <button ng-click="$ctrl.delete(poll._id)" type="button" class="btn btn-xs btn-danger">Delete</button>
+        </span>
       </div>
 
     </div>

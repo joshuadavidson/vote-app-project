@@ -2,23 +2,23 @@ angular
   .module('profile', [
     'header',
     'footer',
-    'authentication'
+    'Authentication'
   ])
 
   .component('appProfile', {
     templateUrl: './auth/profile.template.html',
-    controller: ['authentication', function ProfileController(authentication){
+    controller: ['Authentication', function ProfileController(Authentication){
       var self = this;
 
       //check login status
-      self.isLoggedIn = authentication.isLoggedIn();
+      self.isLoggedIn = Authentication.isLoggedIn();
 
       //setup an object for the profile data
       self.userData = {};
 
       //query the api for the current user onced logged in
       if (self.isLoggedIn) {
-        authentication.currentUser()
+        Authentication.currentUser()
           //store the users data
           .then(function(response) {
             self.userData = response.data;

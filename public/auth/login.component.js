@@ -2,12 +2,12 @@ angular
   .module('login', [
     'header',
     'footer',
-    'authentication'
+    'Authentication'
   ])
 
 .component('appLogin', {
   templateUrl: './auth/login.template.html',
-  controller: ['$http', '$location', 'authentication', function LoginController($http, $location, authentication) {
+  controller: ['$http', '$location', 'Authentication', function LoginController($http, $location, Authentication) {
     var self = this;
 
     //create an object to hold form data
@@ -36,9 +36,9 @@ angular
 
       //if both email and password are provided and valid
       if (self.credentials.email && self.credentials.password) {
-        authentication.login(self.credentials)
+        Authentication.login(self.credentials)
         .then(function() {
-          $location.path('/profile');
+          $location.path('/mypolls');
         })
 
         .catch(function(err) {

@@ -2,12 +2,12 @@ angular
   .module('register', [
     'header',
     'footer',
-    'authentication'
+    'Authentication'
   ])
 
 .component('appRegister', {
   templateUrl: './auth/register.template.html',
-  controller: ['$http', '$location', 'authentication', function RegisterController($http, $location, authentication) {
+  controller: ['$http', '$location', 'Authentication', function RegisterController($http, $location, Authentication) {
     var self = this;
 
     //create an object to hold form data
@@ -35,9 +35,9 @@ angular
 
       if (self.credentials.name && self.credentials.email && self.credentials.password) {
 
-        authentication.register(self.credentials)
+        Authentication.register(self.credentials)
         .then(function() {
-          $location.path('/profile');
+          $location.path('/mypolls');
         })
 
         .catch(function(err) {

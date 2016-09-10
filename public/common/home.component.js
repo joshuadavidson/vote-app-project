@@ -2,17 +2,16 @@ angular
   .module('home', [
   'header',
   'footer',
-  'pollService'
+  'PollService'
 ])
 
   .component('appHome', {
     templateUrl: './common/home.template.html',
-    controller: ['pollService', function HomeController(pollService){
+    controller: ['PollService', function HomeController(PollService){
       var self = this;
 
       //get a list of the most recent polls to display on the page
-      pollService.getPolls().then(function(response){
-        console.log(response);
+      PollService.getPolls().then(function(response){
         self.polls = response.data;
       });
 

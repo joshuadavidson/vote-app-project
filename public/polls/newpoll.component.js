@@ -8,7 +8,7 @@ angular
   ])
 
 .component('appNewPoll', {
-  templateUrl: './polls/newpoll.template.html',
+  templateUrl: './polls/newPoll.template.html',
   controller: ['$routeParams', '$location', '$window', '$anchorScroll', 'Authentication', 'PollService',
     function NewPollController($routeParams, $location, $window, $anchorScroll, Authentication, PollService) {
       var self = this;

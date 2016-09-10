@@ -13,12 +13,17 @@
       <div class="list-group-item clearfix text-center" ng-repeat="poll in $ctrl.polls">
         <h3>{{poll.title}}</h3>
         <small>Responses: {{poll.respondents.length}}<br>
-        <span>
-          <a ng-href="/poll/{{poll._id}}/view" class="btn btn-xs btn-primary">View Poll</a>
-          <a ng-href="/poll/{{poll._id}}/results" class="btn btn-xs btn-success">View Results</a>
-          <a ng-href="/newpoll/{{poll._id}}" class="btn btn-xs btn-warning">New Poll Based on This One</a>
-          <button ng-click="$ctrl.delete(poll._id)" type="button" class="btn btn-xs btn-danger">Delete</button>
-        </span>
+
+        <a ng-href="https://www.facebook.com/sharer/sharer.php?u=http://voting-app-project.herokuapp.com/poll/{{poll._id}}/view" class="btn btn-xs btn-default" target="_blank"><i class="fa fa-facebook"></i> Share</a>
+
+        <a ng-href="/poll/{{poll._id}}/view" class="btn btn-xs btn-primary">View Poll</a>
+
+        <a ng-href="/poll/{{poll._id}}/results" class="btn btn-xs btn-success">View Results</a>
+
+        <a ng-href="/newpoll/{{poll._id}}" class="btn btn-xs btn-warning">New Poll Based on This One</a>
+
+        <button ng-click="$ctrl.delete(poll._id)" type="button" class="btn btn-xs btn-danger">Delete</button>
+
       </div>
 
     </div>

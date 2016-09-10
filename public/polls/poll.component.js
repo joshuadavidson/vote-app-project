@@ -85,6 +85,11 @@ angular
           if (self.state === 'results') {
             self.createPollChart();
           }
+        })
+
+        //error in getting poll data
+        .catch(function(err){
+          $location.path('/'); //redirect to home
         });
 
       //submit the vote to the db

@@ -3,11 +3,14 @@
 <div class="row">
   <div class="col-md-4 col-md-offset-4 text-center">
     <h1>{{$ctrl.poll.title}}</h1>
+    <p>
+      <a ng-href="https://www.facebook.com/sharer/sharer.php?u=http://voting-app-project.herokuapp.com/poll/{{$ctrl.poll._id}}/view" class="btn btn-default" target="_blank"><i class="fa fa-facebook"></i> Share</a>
+    </p>
 
     <!--Viewing the poll-->
     <div ng-show="$ctrl.state === 'view'">
 
-      <form novalidate ng-submit="$ctrl.onSubmit()" class="css-form text-left">
+      <form novalidate ng-submit="$ctrl.onSubmit()" class="css-form text-center">
         <div ng-repeat="question in $ctrl.poll.questions" class="radio">
           <label class="input-lg">
             <input type="radio" ng-model="$ctrl.voteChoice" ng-value="$index">
@@ -19,6 +22,7 @@
           <p>
             <button type="submit" class="btn btn-primary">Submit your Vote</button>
           </p>
+
 
           <p>
             <a ng-show="$ctrl.isLoggedIn && $ctrl.isOwner" ng-href="/poll/{{$ctrl.poll._id}}/results" class="btn btn-success">View Results</a>
@@ -44,14 +48,14 @@
 
     <!--Viewing the results-->
     <div ng-show="$ctrl.state === 'results'">
-      <canvas class="img-responsive" height="300px" id="pollChart"></canvas>
+      <canvas class="img-responsive" height="250px" id="pollChart"></canvas>
 
       <p>
         <small>Click on legend to remove data.<br>Click on slice to view number of responses.</small>
       </p>
 
       <p>
-        <a ng-show="$ctrl.isLoggedIn && $ctrl.isOwner" ng-href="/poll/{{$ctrl.poll._id}}/view" class="btn btn-primary">View Poll</a>
+        <a ng-href="/poll/{{$ctrl.poll._id}}/view" class="btn btn-primary">View Poll</a>
       </p>
 
       <p>
@@ -61,12 +65,6 @@
       <p>
         <button ng-click="$ctrl.delete($ctrl.poll._id)" ng-show="$ctrl.isLoggedIn && $ctrl.isOwner" type="button" class="btn btn-danger">Delete</button>
       </p>
-    </div>
-
-
-    <!--Editing the poll-->
-    <div ng-show="$ctrl.state === 'edit'">
-      edit
     </div>
 
   </div>

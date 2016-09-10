@@ -20,9 +20,9 @@
 
           <li ng-hide="$ctrl.isLoggedIn"><a href="/login">Login <i class="fa fa-sign-in fa-lg"></i></a></li>
 
-          <li ng-show="$ctrl.isLoggedIn"><a href="/mypolls">My Polls <i class="fa fa-folder-open fa-lg"></i></a></li>
+          <li class="navbar-text" ng-show="$ctrl.isLoggedIn">Welcome {{$ctrl.userData.name}}!</li>
 
-          <li ng-show="$ctrl.isLoggedIn"><a href="/profile">My Profile <i class="fa fa-user fa-lg"></i></a></li>
+          <li ng-show="$ctrl.isLoggedIn"><a href="/mypolls">My Polls <i class="fa fa-folder-open fa-lg"></i></a></li>
 
           <li ng-show="$ctrl.isLoggedIn" ng-click="$ctrl.logout()"><a href="/login">Logout <i class="fa fa-sign-out fa-lg"></i></a></li>
 

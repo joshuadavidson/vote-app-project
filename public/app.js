@@ -6,10 +6,10 @@ angular
     'home',
     'register',
     'login',
-    'profile',
     'myPolls',
     'newPoll',
-    'poll'
+    'poll',
+    'pageNotFound'
   ])
 
 .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -26,10 +26,6 @@ angular
 
   .when('/login', {
     template: '<app-login></app-login>'
-  })
-
-  .when('/profile', {
-    template: '<app-profile></app-profile>'
   })
 
   .when('/mypolls', {
@@ -49,7 +45,7 @@ angular
   })
 
   .otherwise({
-    templateUrl: '404.html'
+    template: '<app-page-not-found></app-page-not-found>'
   });
 }])
 
@@ -64,7 +60,7 @@ angular
       pathAttempt = nextRoute.$$route.originalPath;
 
       //check if user is trying to access path that neeeds login
-      if ((pathAttempt === '/profile' || pathAttempt === '/mypolls' ||
+      if ((pathAttempt === '/mypolls' ||
       pathAttempt === '/newpoll'|| pathAttempt === '/newpoll/:pollId') && !Authentication.isLoggedIn()) {
         $location.path('/login'); //redirect to login
       }

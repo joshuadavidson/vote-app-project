@@ -1,70 +1,74 @@
 <app-header></app-header>
 
-<div class="row">
-  <div class="col-md-4 col-md-offset-4 text-center">
-    <h1>{{$ctrl.poll.title}}</h1>
-    <p>
-      <a ng-href="https://www.facebook.com/sharer/sharer.php?u=http://voting-app-project.herokuapp.com/poll/{{$ctrl.poll._id}}/view" class="btn btn-default" target="_blank"><i class="fa fa-facebook"></i> Share</a>
-    </p>
+<div class="container-fluid">
+  <div class="row">
 
-    <!--Viewing the poll-->
-    <div ng-show="$ctrl.state === 'view'">
+    <div class="col-md-4 col-md-offset-4 text-center">
+      <h1>{{$ctrl.poll.title}}</h1>
+      <p>
+        <a ng-href="https://www.facebook.com/sharer/sharer.php?u=http://voting-app-project.herokuapp.com/poll/{{$ctrl.poll._id}}/view" class="btn btn-default" target="_blank"><i class="fa fa-facebook"></i> Share</a>
+      </p>
 
-      <form novalidate ng-submit="$ctrl.onSubmit()" class="css-form text-center">
-        <div ng-repeat="question in $ctrl.poll.questions" class="radio">
-          <label class="input-lg">
-            <input type="radio" ng-model="$ctrl.voteChoice" ng-value="$index">
-            {{question}}
-          </label>
-        </div>
+      <!--Viewing the poll-->
+      <div ng-show="$ctrl.state === 'view'">
 
-        <div class="form-group text-center">
-          <p>
-            <button type="submit" class="btn btn-primary">Submit your Vote</button>
+        <form novalidate ng-submit="$ctrl.onSubmit()" class="css-form text-center">
+          <div ng-repeat="question in $ctrl.poll.questions" class="radio">
+            <label class="input-lg">
+              <input type="radio" ng-model="$ctrl.voteChoice" ng-value="$index">
+              {{question}}
+            </label>
+          </div>
+
+          <div class="form-group text-center">
+            <p>
+              <button type="submit" class="btn btn-primary">Submit your Vote</button>
+            </p>
+
+
+            <p>
+              <a ng-show="$ctrl.isLoggedIn && $ctrl.isOwner" ng-href="/poll/{{$ctrl.poll._id}}/results" class="btn btn-success">View Results</a>
+            </p>
+
+            <p>
+              <a ng-show="$ctrl.isLoggedIn" ng-href="/newpoll/{{$ctrl.poll._id}}" class="btn btn-warning">New Poll Based on This One</a>
+            </p>
+
+            <p>
+              <button ng-click="$ctrl.delete($ctrl.poll._id)" ng-show="$ctrl.isLoggedIn && $ctrl.isOwner" type="button" class="btn btn-danger">Delete</button>
+            </p>
+          </div>
+
+          <p class="bg-danger text-center" ng-show="$ctrl.voteError">
+            {{$ctrl.voteError.data.message}}<br>
+            <span ng-show="$ctrl.voteError.status === 409">Check out the <a ng-href="/poll/{{$ctrl.poll._id}}/results">results</a>.</span>
           </p>
+        </form>
+
+      </div>
 
 
-          <p>
-            <a ng-show="$ctrl.isLoggedIn && $ctrl.isOwner" ng-href="/poll/{{$ctrl.poll._id}}/results" class="btn btn-success">View Results</a>
-          </p>
+      <!--Viewing the results-->
+      <div ng-show="$ctrl.state === 'results'">
+        <canvas class="img-responsive" height="250px" id="pollChart"></canvas>
 
-          <p>
-            <a ng-show="$ctrl.isLoggedIn" ng-href="/newpoll/{{$ctrl.poll._id}}" class="btn btn-warning">New Poll Based on This One</a>
-          </p>
-
-          <p>
-            <button ng-click="$ctrl.delete($ctrl.poll._id)" ng-show="$ctrl.isLoggedIn && $ctrl.isOwner" type="button" class="btn btn-danger">Delete</button>
-          </p>
-        </div>
-
-        <p class="bg-danger text-center" ng-show="$ctrl.voteError">
-          {{$ctrl.voteError.data.message}}<br>
-          <span ng-show="$ctrl.voteError.status === 409">Check out the <a ng-href="/poll/{{$ctrl.poll._id}}/results">results</a>.</span>
+        <p>
+          <small>Click on legend to remove data.<br>Click on slice to view number of responses.</small>
         </p>
-      </form>
 
-    </div>
+        <p>
+          <a ng-href="/poll/{{$ctrl.poll._id}}/view" class="btn btn-primary">View Poll</a>
+        </p>
 
+        <p>
+          <a ng-show="$ctrl.isLoggedIn" ng-href="/newpoll/{{$ctrl.poll._id}}" class="btn btn-warning">New Poll Based on This One</a>
+        </p>
 
-    <!--Viewing the results-->
-    <div ng-show="$ctrl.state === 'results'">
-      <canvas class="img-responsive" height="250px" id="pollChart"></canvas>
+        <p>
+          <button ng-click="$ctrl.delete($ctrl.poll._id)" ng-show="$ctrl.isLoggedIn && $ctrl.isOwner" type="button" class="btn btn-danger">Delete</button>
+        </p>
+      </div>
 
-      <p>
-        <small>Click on legend to remove data.<br>Click on slice to view number of responses.</small>
-      </p>
-
-      <p>
-        <a ng-href="/poll/{{$ctrl.poll._id}}/view" class="btn btn-primary">View Poll</a>
-      </p>
-
-      <p>
-        <a ng-show="$ctrl.isLoggedIn" ng-href="/newpoll/{{$ctrl.poll._id}}" class="btn btn-warning">New Poll Based on This One</a>
-      </p>
-
-      <p>
-        <button ng-click="$ctrl.delete($ctrl.poll._id)" ng-show="$ctrl.isLoggedIn && $ctrl.isOwner" type="button" class="btn btn-danger">Delete</button>
-      </p>
     </div>
 
   </div>

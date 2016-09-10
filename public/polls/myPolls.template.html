@@ -1,18 +1,20 @@
 <app-header></app-header>
 
-<div class="row">
-  <div class="col-md-4 col-md-offset-4 text-center">
-    <h1>My Polls</h1>
+<div class="container-fluid">
+  <div class="row">
 
-    <p>
-      <a ng-href="/newpoll" class="btn btn-default">Create New Poll</a>
-    </p>
+    <div class="col-md-4 col-md-offset-4 text-center">
+      <h1>My Polls</h1>
 
-    <div class="list-group text-left">
+      <p>
+        <a ng-href="/newpoll" class="btn btn-default">Create New Poll</a>
+      </p>
 
-      <div class="list-group-item clearfix text-center" ng-repeat="poll in $ctrl.polls">
-        <h3>{{poll.title}}</h3>
-        <small>Responses: {{poll.respondents.length}}<br>
+      <div class="list-group text-left">
+
+        <div class="list-group-item clearfix text-center" ng-repeat="poll in $ctrl.polls">
+          <h3>{{poll.title}}</h3>
+          <small>Responses: {{poll.respondents.length}}<br>
 
         <a ng-href="https://www.facebook.com/sharer/sharer.php?u=http://voting-app-project.herokuapp.com/poll/{{poll._id}}/view" class="btn btn-xs btn-default" target="_blank"><i class="fa fa-facebook"></i> Share</a>
 

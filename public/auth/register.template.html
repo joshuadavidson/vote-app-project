@@ -1,44 +1,48 @@
 <app-header></app-header>
 
-<div class="row">
-  <div class="col-sm-4 col-sm-offset-4 text-center">
-    <h1>Register</h1>
-    <p>
-      Aready have an account? <a href="/login" class="">Login</a>
-    </p>
+<div class="container-fluid">
+  <div class="row">
 
-    <p class="bg-danger" ng-show="$ctrl.loginError">
-      {{$ctrl.loginError}}
-    </p>
+    <div class="col-sm-4 col-sm-offset-4 text-center">
+      <h1>Register</h1>
+      <p>
+        Aready have an account? <a href="/login" class="">Login</a>
+      </p>
 
-    <form novalidate ng-submit="$ctrl.onSubmit()" class="css-form text-left" >
+      <p class="bg-danger" ng-show="$ctrl.loginError">
+        {{$ctrl.loginError}}
+      </p>
 
-      <div class="form-group">
-        <label for="name" class="control-label">Name</label>
+      <form novalidate ng-submit="$ctrl.onSubmit()" class="css-form text-left" >
 
-          <input type="text" ng-model="$ctrl.credentials.name" class="form-control" placeholder="Name" autofocus="autofocus" required />
+        <div class="form-group">
+          <label for="name" class="control-label">Name</label>
 
-      </div>
+            <input type="text" ng-model="$ctrl.credentials.name" class="form-control" placeholder="Name" autofocus="autofocus" required />
 
-      <div class="form-group">
-        <label for="email" class="control-label">Email</label>
+        </div>
 
-          <input type="email" ng-model="$ctrl.credentials.email" class="form-control" placeholder="Email" required />
+        <div class="form-group">
+          <label for="email" class="control-label">Email</label>
 
-      </div>
+            <input type="email" ng-model="$ctrl.credentials.email" class="form-control" placeholder="Email" required />
 
-      <div class="form-group">
-        <label for="password" class="control-label">Password</label>
+        </div>
 
-          <input type="password" ng-model="$ctrl.credentials.password" class="form-control" placeholder="Password" required />
+        <div class="form-group">
+          <label for="password" class="control-label">Password</label>
 
-      </div>
+            <input type="password" ng-model="$ctrl.credentials.password" class="form-control" placeholder="Password" required />
 
-      <div class="form-group text-center">
-          <button type="submit" class="btn btn-primary">Sign Up</button>
-      </div>
+        </div>
 
-    </form>
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
+
+      </form>
+    </div>
+
   </div>
 </div>
 

@@ -53,17 +53,7 @@ app.use(express.static('public'));
 app.get('/*', function(req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
-/*
-//catch 404 errors
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  res.render('404', {
-    message: err.message,
-    error: err
-  });
-});
-*/
+
 //error handlers
 app.use(function(err, req, res, next) {
   //handle express-jwt authorization errors

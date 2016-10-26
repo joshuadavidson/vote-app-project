@@ -16,7 +16,7 @@ var authorizeWithJWT = expressJWT({
 //get most recent polls (no authentication needed)
 router.get('', function(req, res, next) {
 
-  var limit = req.query.limit || 15; //set the query limit
+  var limit = parseInt(req.query.limit) || 15; //set the query limit
 
   //find the most recent 10 polls sorted newest to oldest
   Poll.find({})
@@ -32,6 +32,8 @@ router.get('', function(req, res, next) {
       res.json(polls);
     })
     .catch(function(err) {
+      console.log('got error');
+      console.log(err);
       next(err); //pass the error to the error handler
     });
 });
@@ -57,7 +59,7 @@ router.get('/:pollId', function(req, res, next) {
 
     //all other errors pass to the error handler
     else {
-      next(err); 
+      next(err);
     }
   });
 });
